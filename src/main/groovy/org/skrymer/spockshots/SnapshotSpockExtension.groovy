@@ -36,9 +36,14 @@ class SnapshotSpockExtension extends AbstractAnnotationDrivenExtension<Snapshot>
   }
 
   private static snapshotFolderPath(spec) {
-    def rootFolder = './src/test/groovy'
+    def config = ((SpecInfo) spec).getAnnotation(Spockshot)
+    if(config == null){
+      throw new MissingConfigException()
+    }
+
+    def rootFolder = config.rootFolder()
     def executionSubFolder = spec.getPackage().replace('.', '/')
-    def snapshotFolder = "__snapshots__"
+    def snapshotFolder = config.snapshotFolderName()
 
     return "$rootFolder/$executionSubFolder/$snapshotFolder/"
             .replace('/', FileSystems.getDefault().getSeparator())
@@ -51,6 +56,12 @@ class SnapshotSpockExtension extends AbstractAnnotationDrivenExtension<Snapshot>
   static class CouldNotFindSnapshotException extends RuntimeException {
     CouldNotFindSnapshotException(String snapshot){
       super(snapshot)
+    }
+  }
+
+  static class MissingConfigException extends RuntimeException {
+    MissingConfigException(){
+      super("Missing Spockshot annotation. Please add @Spockshot to your specification")
     }
   }
 }

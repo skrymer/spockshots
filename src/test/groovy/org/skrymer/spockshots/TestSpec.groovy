@@ -2,6 +2,10 @@ package org.skrymer.spockshots
 
 import spock.lang.Specification
 
+
+@Spockshot(
+    rootFolder = "./src/test/groovy"
+)
 class TestSpec extends Specification {
 
     @Snapshot(snapshotName = 'snapshot')
