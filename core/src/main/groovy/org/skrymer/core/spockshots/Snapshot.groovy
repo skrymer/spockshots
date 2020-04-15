@@ -1,4 +1,4 @@
-package org.skrymer.spockshots
+package org.skrymer.core.spockshots
 
 
 import org.spockframework.runtime.extension.ExtensionAnnotation
@@ -13,7 +13,7 @@ import java.lang.annotation.Target
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ExtensionAnnotation(SnapshotSpockExtension.class)
+@ExtensionAnnotation(SnapshotSpockExtension)
 @interface Snapshot {
     String snapshotName()
 }
