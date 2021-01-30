@@ -1,4 +1,4 @@
-package org.skrymer.core.spockshots
+package org.skrymer.spockshots.core
 
 
 import org.spockframework.runtime.extension.ExtensionAnnotation

@@ -1,4 +1,4 @@
-package org.skrymer.core.spockshots
+package org.skrymer.spockshots.core
 
 import java.lang.annotation.ElementType
 import java.lang.annotation.Retention

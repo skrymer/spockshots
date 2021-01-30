@@ -1,4 +1,4 @@
-package org.skrymer.core.spockshots
+package org.skrymer.spockshots.core
 
 import groovy.util.logging.Log
 import org.spockframework.runtime.AbstractRunListener
@@ -14,17 +14,17 @@ class SnapshotListener extends AbstractRunListener {
   void beforeFeature(FeatureInfo feature) {
     def snapshot = SnapshotHolder.getSnapshotForFeature(feature)
     if (snapshot != null) {
-      log.info("found snapshot for feature $feature.name")
+      log.debug("found snapshot for feature $feature.name")
       SnapshotHolder.setCurrentSnapshot(snapshot)
     } else {
-      log.info("beforeSpec ran but no snapshot for this test")
+      log.debug("beforeSpec ran but no snapshot for this test")
       SnapshotHolder.setCurrentSnapshot("beforeSpec ran but no snapshot for this test")
     }
   }
 
   @Override
   void afterSpec(SpecInfo spec) {
-    log.info("afterSpec ran and destroyed current snapshot")
+    log.debug("afterSpec ran and destroyed current snapshot")
     SnapshotHolder.setCurrentSnapshot("afterSpec ran and destroyed current snapshot")
   }
 }
