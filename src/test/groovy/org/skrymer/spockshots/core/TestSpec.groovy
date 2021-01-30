@@ -1,4 +1,4 @@
-package org.skrymer.core.spockshots
+package org.skrymer.spockshots.core
 
 import spock.lang.Specification
 
