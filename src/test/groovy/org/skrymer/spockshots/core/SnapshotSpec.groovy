@@ -2,24 +2,24 @@ package org.skrymer.spockshots.core
 
 import spock.lang.Specification
 
-
 @Spockshot(
     rootFolder = "./src/test/groovy"
 )
-class TestSpec extends Specification {
+class SnapshotSpec extends Specification {
 
     @Snapshot(snapshotName = 'snapshot')
     def 'should load snapshot' () {
         given: 'some json'
-        def json =
+        def expectedSnapshot =
         """
         {
-            "first": "John",
+            "first": "Sonni",
             "last": "Doe"
         }
-        """
+        """.replaceAll("\\s","")
 
         expect:
-        SnapshotHolder.getSnapshot().replaceAll("\\s","") == json.replaceAll("\\s","")
+        def snapshot = SnapshotHolder.getSnapshot()
+        snapshot.replaceAll("\\s","") == expectedSnapshot
     }
 }

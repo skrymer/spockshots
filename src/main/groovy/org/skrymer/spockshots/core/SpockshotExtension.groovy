@@ -11,9 +11,10 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 /**
- * loads snapshot specified in @Snapshot and puts it in SnapshotHolder
+ * Loads snapshot specified in @Snapshot and puts it in SnapshotHolder
+ * Root folder can be overridden using @Spockshot on Specification class
  */
-class SnapshotSpockExtension extends AbstractAnnotationDrivenExtension<Snapshot> {
+class SpockshotExtension extends AbstractAnnotationDrivenExtension<Snapshot> {
     def snapListener = new SnapshotListener()
 
     @Override
@@ -25,9 +26,9 @@ class SnapshotSpockExtension extends AbstractAnnotationDrivenExtension<Snapshot>
     }
 
     private static String getSnapshotContent(Snapshot annotation, SpecInfo spec) {
-        def snapshotName = annotation.name()
-        // Should be overridable with sys prop
-        def rootFolder = './src/test/java'
+        def snapshotName = annotation.snapshotName()
+        def spockshotAnnotation = spec.getAnnotation(Spockshot)
+        def rootFolder = spockshotAnnotation != null ? spockshotAnnotation.rootFolder() : './src/test/java'
         def executionSubFolder = spec.getPackage().replace('.', '/')
         def snapshotFolderPath = "$rootFolder/$executionSubFolder/__snapshots__/"
                 .replace('/', FileSystems.getDefault().getSeparator())
