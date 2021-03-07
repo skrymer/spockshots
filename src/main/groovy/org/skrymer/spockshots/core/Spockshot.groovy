@@ -9,5 +9,4 @@ import java.lang.annotation.Target
 @Target(ElementType.TYPE)
 @interface Spockshot {
     String rootFolder() default "./src/test/java"
-    String snapshotFolderName() default "__snapshots__"
 }

@@ -13,7 +13,7 @@ import java.lang.annotation.Target
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ExtensionAnnotation(SnapshotSpockExtension)
+@ExtensionAnnotation(SpockshotExtension)
 @interface Snapshot {
     String snapshotName()
 }
